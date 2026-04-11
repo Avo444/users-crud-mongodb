@@ -77,7 +77,7 @@ project/
 
 ```bash
 git clone https://github.com/Avo444/users-crud-mongodb.git
-cd project
+cd users-crud-mongodb
 ```
 
 2. Install dependencies:
