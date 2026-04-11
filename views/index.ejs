@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/js/script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="heading">
+        <h3 class="title"><%=title%></h3>
+        <button class="btn" data-id="sort">Sort</button>
+      </div>
+      <ul class="content" id="content">
+        <% users.forEach((user) => { %>
+          <%-include("components/item", { user })%>
+        <% }) %>
+      </ul>
+    </div>
+    
+  </body>
+</html>

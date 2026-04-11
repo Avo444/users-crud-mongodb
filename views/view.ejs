@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%=user.firstName %> <%=user.lastName %></title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <script src="/js/script.js" defer></script>
+    </head>
+    <body>
+        <div class="viewContainer">
+            <div class="heading">
+                <h3 class="title"><%=user.firstName %> <%=user.lastName %></h3>
+            </div>
+            <form class="item view" id="changeForm" data-id="<%=user._id%>">
+                <label>
+                    First Name
+                    <input type="text" name="firstName" value="<%=user.firstName %>" required />
+                </label>
+                <label>
+                    Last Name
+                    <input type="text" name="lastName" value="<%=user.lastName %>" required />
+                </label>
+                <label>
+                    Age
+                    <input type="number" name="age" value="<%=user.age %>" required />
+                </label>
+                <label>
+                    Gender
+                    <select name="gender">
+                        <option value="male" <%=user.gender === "male" ? "selected" : "" %>>Male</option>
+                        <option value="female" <%=user.gender === "female" ? "selected" : "" %>>Female</option>
+                    </select>
+                </label>
+                <div class="buttons">
+                    <button type="submit" class="btn">Update</button>
+                    <button type="button" id="<%=user._id%>" class="btn btn-delete" data-id="delete">Delete</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

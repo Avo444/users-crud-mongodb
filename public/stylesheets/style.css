@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+body {
+    background-color: #e6edef;
+    font-family: "Open Sans", sans-serif;
+}
+
+.container {
+    max-width: 1440px;
+    margin: auto;
+    padding-top: 40px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heading .title {
+    font-size: 36px;
+    font-weight: 700;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px 0;
+    justify-content: center;
+}
+
+.title {
+    color: #515b34;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 10px;
+    max-width: 340px;
+    width: 100%;
+    padding: 25px 10px;
+    box-shadow: 0px 3px 5px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    background-color: #fff9f9;
+    justify-content: center;
+    transition: all 0.3s;
+}
+.item:not(.view):hover {
+    transform: translateY(-10px);
+}
+.item .id {
+    font-size: 12px;
+}
+
+.item .title {
+    font-size: 24px;
+}
+
+.item .gender {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn {
+    color: #fff9f9;
+    cursor: pointer;
+    padding: 5px 20px;
+    border-radius: 30px;
+    transition: all 0.3s;
+    background-color: #d97961;
+    border: 1px solid #d97961;
+    font-size: 16px;
+}
+
+.btn-delete {
+    background-color: #e85555;
+    border-color: #e85555;
+}
+
+.btn-delete:hover {
+    color: #e85555;
+}
+
+.btn:hover {
+    color: #d97961;
+    background-color: #fff9f9;
+}
+
+.viewContainer {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 25px;
+}
+.view {
+    max-width: 600px;
+    padding:  30px;
+}
+ label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+ label input, label select{
+    padding: 10px;
+    border: 1px solid #d97961;
+    border-radius: 10px;
+    outline: none;
+}
