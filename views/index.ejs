@@ -9,14 +9,19 @@
     <div class="container">
       <div class="heading">
         <h3 class="title"><%=title%></h3>
-        <button class="btn" data-id="sort">Sort</button>
+        <div class="buttons">
+
+          <button class="btn" data-id="add">Add User</button>
+          <button class="btn" data-id="sort">Sort</button>
+        </div>
       </div>
       <ul class="content" id="content">
         <% users.forEach((user) => { %>
           <%-include("components/item", { user })%>
         <% }) %>
       </ul>
+      <%-include("components/modal")%>
     </div>
-    
+    <div class="notification__container" id="notificationContainer"></div>
   </body>
 </html>
