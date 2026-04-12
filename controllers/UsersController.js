@@ -58,6 +58,18 @@ class UsersController {
             sendResponse(res, error, 500);
         }
     }
+
+    async addUser(req, res) {
+        try {
+            const { body } = res.locals;
+            const isAdded = await req.app.locals.services.users.addUser(body);
+            
+            sendResponse(res, isAdded);
+        } catch (err) {
+            const error = { error: err.message };
+            sendResponse(res, error, 500);
+        }
+    }
 }
 
 module.exports = UsersController;

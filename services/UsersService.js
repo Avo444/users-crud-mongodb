@@ -4,7 +4,7 @@ const DatabaseService = require("./DatabaseService");
 class UsersService extends DatabaseService {
     async getAllUsers(query = {}) {
         const db = await this.connect();
-        let cursor =  db.collection("users").find();
+        let cursor = db.collection("users").find();
         if (query.sort === "asc") {
             cursor = cursor.sort({ age: 1 });
         } else if (query.sort === "desc") {
@@ -37,6 +37,12 @@ class UsersService extends DatabaseService {
             .collection("users")
             .updateOne({ _id: new ObjectId(id) }, { $set: { ...body } });
         return update;
+    }
+
+    async addUser(body) {
+        const db = await this.connect();
+        const user = await db.collection("users").insertOne(body);
+        return user;
     }
 }
 

@@ -1,5 +1,8 @@
+const modal = document.getElementById("modal");
 const content = document.getElementById("content");
 const changeForm = document.getElementById("changeForm");
+const modalContainer = document.getElementById("modalContainer");
+const notificationContainer = document.getElementById("notificationContainer");
 
 let sort = "asc";
 
@@ -11,10 +14,46 @@ document.addEventListener("click", async (e) => {
     } else if (id === "delete") {
         const userID = e.target.id;
         await deleteAccount(userID);
+    } else if (id === "add") {
+        modalContainer.classList.add("active");
     }
 });
 
-changeForm.addEventListener("submit", changeUserData);
+changeForm?.addEventListener("submit", changeUserData);
+modal?.addEventListener("submit", addUser);
+modalContainer?.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) {
+        modalContainer.classList.remove("active");
+    }
+});
+
+async function addUser(e) {
+    try {
+        e.preventDefault();
+        const form = new FormData(e.target);
+        const formData = Object.fromEntries(form.entries());
+
+        const response = await fetch("http://localhost:3000/api/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error);
+        }
+
+        showNotification("User is added", "success");
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 3000);
+    } catch (error) {
+        showNotification(error.message, "error");
+    }
+}
 
 async function sortData() {
     try {
@@ -28,7 +67,7 @@ async function sortData() {
         }
         renderData(data);
     } catch (error) {
-        alert(error.message);
+        showNotification(error.message, "error");
     }
 }
 
@@ -52,16 +91,20 @@ function renderData(data) {
 
 async function deleteAccount(id) {
     try {
+        const isDelete = confirm("Do you want to delete?");
+        if (!isDelete) return;
         const response = await fetch(`http://localhost:3000/api/users/${id}`, {
             method: "DELETE",
         });
         if (!response.ok) {
             throw new Error("There are was a problem");
         }
-
-        window.location.href = "/";
+        showNotification("User is deleted!", "success");
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 3000);
     } catch (error) {
-        alert(error.message);
+        showNotification(error.message, "error");
     }
 }
 
@@ -85,8 +128,26 @@ async function changeUserData(e) {
             throw new Error(data.error);
         }
 
-        window.location.reload();
+        showNotification("User is updated!", "success");
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
     } catch (error) {
         alert(error.message);
     }
+}
+
+function showNotification(message, type) {
+    const notification = document.createElement("div");
+
+    notification.classList.add("notification", "show", type);
+    notification.textContent = message;
+    notificationContainer.append(notification);
+
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, 3000);
+    setTimeout(() => {
+        notification.remove();
+    }, 3200);
 }
