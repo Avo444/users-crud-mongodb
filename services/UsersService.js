@@ -35,7 +35,7 @@ class UsersService extends DatabaseService {
         const db = await this.connect();
         const update = await db
             .collection("users")
-            .updateOne({ _id: new ObjectId(id) }, { $set: { ...body } });
+            .updateOne({ _id: new ObjectId(id) }, { $set: body });
         return update;
     }
 
