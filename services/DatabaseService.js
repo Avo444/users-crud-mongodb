@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb");
 
 class DatabaseService {
-    async connect(cb) {
+    async connect() {
         const client = await MongoClient.connect(process.env.MONGODB_URL);
         const db = await client.db();
         return db;
